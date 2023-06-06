@@ -31,6 +31,7 @@
 		210ECB302A2DAF4700EFB7AC /* volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume.png; sourceTree = "<group>"; };
 		210ECB312A2DB39800EFB7AC /* on.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = on.svg; sourceTree = "<group>"; };
 		210ECB322A2DB3ED00EFB7AC /* off.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = off.svg; sourceTree = "<group>"; };
+		210ECB332A2EDC2D00EFB7AC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2145BA782A29945300A7838C /* SDVolume */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDVolume; sourceTree = BUILT_PRODUCTS_DIR; };
 		2145BA7B2A29945300A7838C /* SDVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDVolume.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +62,7 @@
 		2145BA6F2A29945300A7838C = {
 			isa = PBXGroup;
 			children = (
+				210ECB332A2EDC2D00EFB7AC /* README.md */,
 				2145BA7A2A29945300A7838C /* SDVolume */,
 				2145BA792A29945300A7838C /* Products */,
 			);
