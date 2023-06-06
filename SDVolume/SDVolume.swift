@@ -5,6 +5,7 @@
 //  Created by AJ Foster on 6/1/23.
 //
 
+import CoreAudio
 import Foundation
 import StreamDeck
 
@@ -25,18 +26,16 @@ class SDVolume: PluginDelegate {
     static var os: [PluginOS] = [.mac(minimumVersion: "10.15")]
     static var applicationsToMonitor: ApplicationsToMonitor?
     static var software: PluginSoftware = .minimumVersion("6.0")
-    static var actions: [any Action.Type] = [
-        RotaryAction.self
-    ]
+    static var actions: [any Action.Type] = [RotaryAction.self]
 
+    // MARK: Init
     required init() {
         NSLog("Init: com.aj-foster.sd-plugin-volume")
     }
 }
 
 class RotaryAction: EncoderAction {
-    typealias Settings = NoSettings
-
+    // MARK: Manifest
     static var name: String = "Volume"
     static var uuid: String = "com.aj-foster.sd-plugin-volume.dial"
     static var icon: String = "assets/volume"
@@ -48,11 +47,25 @@ class RotaryAction: EncoderAction {
                                                        push: "Mute or Unmute",
                                                        touch: "Mute or Unmute")
 
+    // MARK: Dial State
     var context: String
     var coordinates: StreamDeck.Coordinates?
     var level: Int?
     var muted: Bool?
+    
+    lazy var onLevelDidChange: AudioObjectPropertyListenerBlock = {_, _ in
+        NSLog("Event: Volume level did change")
+        self.level = SystemVolume.get()
+        self.setFeedback()
+    }
+    
+    lazy var onMuteDidChange: AudioObjectPropertyListenerBlock = {_, _ in
+        NSLog("Event: Mute did change")
+        self.muted = SystemVolume.getMute()
+        self.setFeedback()
+    }
 
+    // MARK: Init
     required init(context: String, coordinates: StreamDeck.Coordinates?) {
         NSLog("Init: com.aj-foster.sd-plugin-volume.dial (\(context))")
 
@@ -62,13 +75,15 @@ class RotaryAction: EncoderAction {
         self.coordinates = coordinates
     }
 
+    // MARK: Dial Callbacks
     func willAppear(device: String, payload: AppearEvent<NoSettings>) {
         NSLog("Will Appear: com.aj-foster.sd-plugin-volume.dial")
+        SystemVolume.listen(onLevelDidChange, onMuteDidChange)
         setFeedbackLayout(.indicator)
         setFeedback()
     }
 
-    func dialRotate(device: String, payload: EncoderEvent<Settings>) {
+    func dialRotate(device: String, payload: EncoderEvent<NoSettings>) {
         NSLog("Dial Rotate: com.aj-foster.sd-plugin-volume.dial")
         _ = SystemVolume.change(by: payload.ticks)
 
@@ -92,6 +107,7 @@ class RotaryAction: EncoderAction {
         setFeedback()
     }
     
+    // MARK: Helpers
     func setFeedback() {
         if self.muted == true {
             StreamDeckPlugin.shared.instances.values.forEach {
