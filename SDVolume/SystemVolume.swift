@@ -109,8 +109,24 @@ struct SystemVolume {
 
         let muteAddError = AudioObjectAddPropertyListenerBlock(deviceID, &mutePropertyAddress, .global(qos: .userInteractive), onMuteDidChange)
         guard muteAddError == noErr else { return }
+    }
+    
+    public static func removeListeners(
+        _ onLevelDidChange: @escaping AudioObjectPropertyListenerBlock,
+        _ onMuteDidChange: @escaping AudioObjectPropertyListenerBlock
+    ) {
+        guard let deviceID = try? defaultOutputDevice() else { return }
+        var volumePropertyAddress = volumePropertyAddress()
+        guard AudioObjectHasProperty(deviceID, &volumePropertyAddress) else { return }
+
+        let volumeAddError = AudioObjectRemovePropertyListenerBlock(deviceID, &volumePropertyAddress, .global(qos: .userInteractive), onLevelDidChange)
+        guard volumeAddError == noErr else { return }
         
-        NSLog("LISTEN: Worked")
+        var mutePropertyAddress = mutePropertyAddress()
+        guard AudioObjectHasProperty(deviceID, &mutePropertyAddress) else { return }
+
+        let muteAddError = AudioObjectRemovePropertyListenerBlock(deviceID, &mutePropertyAddress, .global(qos: .userInteractive), onMuteDidChange)
+        guard muteAddError == noErr else { return }
     }
     
     private static func defaultOutputDevice() throws -> AudioDeviceID? {

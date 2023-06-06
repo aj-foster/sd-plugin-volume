@@ -65,7 +65,7 @@ class RotaryAction: EncoderAction {
         self.setFeedback()
     }
 
-    // MARK: Init
+    // MARK: Lifecycle
     required init(context: String, coordinates: StreamDeck.Coordinates?) {
         NSLog("Init: com.aj-foster.sd-plugin-volume.dial (\(context))")
 
@@ -73,6 +73,10 @@ class RotaryAction: EncoderAction {
         self.muted = SystemVolume.getMute()
         self.context = context
         self.coordinates = coordinates
+    }
+    
+    deinit {
+        SystemVolume.removeListeners(onLevelDidChange, onMuteDidChange)
     }
 
     // MARK: Dial Callbacks
