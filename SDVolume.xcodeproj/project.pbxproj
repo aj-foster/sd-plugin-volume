@@ -7,24 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2145BA7C2A29945300A7838C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2145BA7B2A29945300A7838C /* main.swift */; };
+		210ECB2D2A2D8B8D00EFB7AC /* SystemVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210ECB2C2A2D8B8D00EFB7AC /* SystemVolume.swift */; };
+		2145BA7C2A29945300A7838C /* SDVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2145BA7B2A29945300A7838C /* SDVolume.swift */; };
+		2145BA872A2994E500A7838C /* StreamDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 2145BA862A2994E500A7838C /* StreamDeck */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2145BA762A29945300A7838C /* CopyFiles */ = {
+		2145BA762A29945300A7838C /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		210ECB2C2A2D8B8D00EFB7AC /* SystemVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemVolume.swift; sourceTree = "<group>"; };
+		210ECB2F2A2DAF4700EFB7AC /* volume@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volume@2x.png"; sourceTree = "<group>"; };
+		210ECB302A2DAF4700EFB7AC /* volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume.png; sourceTree = "<group>"; };
+		210ECB312A2DB39800EFB7AC /* on.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = on.svg; sourceTree = "<group>"; };
+		210ECB322A2DB3ED00EFB7AC /* off.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = off.svg; sourceTree = "<group>"; };
 		2145BA782A29945300A7838C /* SDVolume */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDVolume; sourceTree = BUILT_PRODUCTS_DIR; };
-		2145BA7B2A29945300A7838C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		2145BA7B2A29945300A7838C /* SDVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDVolume.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,12 +40,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2145BA872A2994E500A7838C /* StreamDeck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		210ECB2E2A2DAF2400EFB7AC /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				210ECB322A2DB3ED00EFB7AC /* off.svg */,
+				210ECB312A2DB39800EFB7AC /* on.svg */,
+				210ECB302A2DAF4700EFB7AC /* volume.png */,
+				210ECB2F2A2DAF4700EFB7AC /* volume@2x.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		2145BA6F2A29945300A7838C = {
 			isa = PBXGroup;
 			children = (
@@ -57,7 +77,9 @@
 		2145BA7A2A29945300A7838C /* SDVolume */ = {
 			isa = PBXGroup;
 			children = (
-				2145BA7B2A29945300A7838C /* main.swift */,
+				210ECB2E2A2DAF2400EFB7AC /* assets */,
+				2145BA7B2A29945300A7838C /* SDVolume.swift */,
+				210ECB2C2A2D8B8D00EFB7AC /* SystemVolume.swift */,
 			);
 			path = SDVolume;
 			sourceTree = "<group>";
@@ -71,13 +93,16 @@
 			buildPhases = (
 				2145BA742A29945300A7838C /* Sources */,
 				2145BA752A29945300A7838C /* Frameworks */,
-				2145BA762A29945300A7838C /* CopyFiles */,
+				2145BA762A29945300A7838C /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SDVolume;
+			packageProductDependencies = (
+				2145BA862A2994E500A7838C /* StreamDeck */,
+			);
 			productName = SDVolume;
 			productReference = 2145BA782A29945300A7838C /* SDVolume */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +131,9 @@
 				Base,
 			);
 			mainGroup = 2145BA6F2A29945300A7838C;
+			packageReferences = (
+				2145BA852A2994E500A7838C /* XCRemoteSwiftPackageReference "StreamDeckPlugin" */,
+			);
 			productRefGroup = 2145BA792A29945300A7838C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +148,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2145BA7C2A29945300A7838C /* main.swift in Sources */,
+				2145BA7C2A29945300A7838C /* SDVolume.swift in Sources */,
+				210ECB2D2A2D8B8D00EFB7AC /* SystemVolume.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +313,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2145BA852A2994E500A7838C /* XCRemoteSwiftPackageReference "StreamDeckPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/emorydunn/StreamDeckPlugin.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2145BA862A2994E500A7838C /* StreamDeck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2145BA852A2994E500A7838C /* XCRemoteSwiftPackageReference "StreamDeckPlugin" */;
+			productName = StreamDeck;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2145BA702A29945300A7838C /* Project object */;
 }
